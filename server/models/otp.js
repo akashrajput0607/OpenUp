@@ -5,6 +5,13 @@ const otpSchema=mongoose.Schema({
         type:String
     },
     otp:{
-        
+        type:String
+    },
+    attempts:{
+        type:Number,
+        default:3
     }
 })
+
+const OTP=mongoose.model("OTP",otpSchema);
+export default OTP
