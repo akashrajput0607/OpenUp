@@ -1,12 +1,12 @@
 import Image from "next/image";
-import Signup from "./Auth/Signup/page";
-import Signin from "./Auth/Signin/page";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="">
-      <Signin/>
-      <Signup/>
-    </div>
+   <div>
+    <Link href="/Home">go to Home page</Link><br></br>
+    <Link href="./Auth/Signup">go to signup page</Link><br></br>
+    <Link href="./Auth/Signin">go to signin page</Link>
+   </div>
   );
 }

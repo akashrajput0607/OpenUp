@@ -3,8 +3,8 @@ import React from 'react'
 function page() {
   return (
     <div className='flex justify-center items-center'>
-      Homepage
-      <button className='text-green-200'>Forward</button>
+      <h1>Homepage</h1>
+      <button className='text-red-600 cursor-pointer'>Forward</button>
     </div>
   )
 }
