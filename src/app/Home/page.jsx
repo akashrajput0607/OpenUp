@@ -8,12 +8,8 @@ import Sidebar from "../components/Sidebar";
 export default function Dashboard() {
   const router = useRouter();
   const [user, setUser] = useState(null);
-  const [friends, setFriends] = useState([
-    { id: 101, username: "John" },
-    { id: 102, username: "Sarah" },
-    { id: 103, username: "Michael" },
-  ]);
-  const [selectedFriend, setSelectedFriend] = useState(null);
+
+  const [friends, setFriends] = useState(null);
 
   const [messages, setMessages] = useState([
     { id: 1, sender: "bot", text: "Hello! How can I assist you?" },
@@ -22,16 +18,17 @@ export default function Dashboard() {
   const [input, setInput] = useState("");
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const userData = localStorage.getItem("user");
-
-    if (!token || !userData) {
-      router.push("/Auth/signin");
-      return;
+    async function loadFriends() {
+      try {
+        const res = await api.get("/users");
+        setFriends(res.data.users);
+      } catch (err) {
+        console.log("Error loading users:", err);
+      }
     }
 
-    setUser(JSON.parse(userData));
-  }, [router]);
+    loadFriends();
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
