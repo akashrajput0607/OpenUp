@@ -16,6 +16,7 @@ export async function getUser() {
 
 // 2) Create OR get chat between two users
 export async function createChatAPI(userId1, userId2) {
+  console.log("CreatechatAPI is running")
   try {
     const res = await API.post("msg/create", {
       userIds: [userId1, userId2],

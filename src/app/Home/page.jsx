@@ -4,7 +4,12 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Sidebar from "../components/Sidebar";
 import ChatWindow from "../components/ChatWindow";
-import { createChatAPI, getChatMessages, getUser, sendChatMessage } from "../services/chat";
+import {
+  createChatAPI,
+  getChatMessages,
+  getUser,
+  sendChatMessage,
+} from "../services/chat";
 
 export default function Dashboard() {
   const router = useRouter();
@@ -17,7 +22,8 @@ export default function Dashboard() {
   // Load logged-in user and friends on mount
   useEffect(() => {
     // load user from localStorage
-    const rawUser = typeof window !== "undefined" && localStorage.getItem("user");
+    const rawUser =
+      typeof window !== "undefined" && localStorage.getItem("user");
     if (!rawUser) {
       router.push("/Auth/signin");
       return;
@@ -29,8 +35,8 @@ export default function Dashboard() {
     (async () => {
       try {
         const res = await getUser();
-        console.log("getUsers() error",res);
-        
+        console.log("getUsers() error", res);
+
         if (res?.success) setFriends(res.data || []);
         else setFriends([]);
       } catch (err) {
@@ -46,6 +52,10 @@ export default function Dashboard() {
 
   // create or get chat when selecting friend (uses helper)
   const handleFriendSelect = async (friend) => {
+    // console.log(friend);
+    console.log("Selected friend:", friend);
+    console.log("Friend ID:", friend._id);
+    console.log("My ID:", user._id);
     if (!user) return;
 
     try {
@@ -132,7 +142,11 @@ export default function Dashboard() {
 
       {/* Main area: sidebar + chat */}
       <div className="flex flex-1 overflow-hidden">
-        <Sidebar friends={friends} onSelectFriend={handleFriendSelect} selectedFriend={selectedFriend} />
+        <Sidebar
+          friends={friends}
+          onSelectFriend={handleFriendSelect}
+          selectedFriend={selectedFriend}
+        />
 
         <div className="flex-1">
           <ChatWindow
