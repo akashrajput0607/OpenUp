@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Sidebar from "../components/Sidebar";
 import ChatWindow from "../components/ChatWindow";
-import { createChatAPI, getChatMessages, getUsers, sendChatMessage } from "../services/chat";
+import { createChatAPI, getChatMessages, getUser, sendChatMessage } from "../services/chat";
 
 export default function Dashboard() {
   const router = useRouter();
@@ -28,7 +28,9 @@ export default function Dashboard() {
     // load friends using helper
     (async () => {
       try {
-        const res = await getUsers();
+        const res = await getUser();
+        console.log("getUsers() error",res);
+        
         if (res?.success) setFriends(res.data || []);
         else setFriends([]);
       } catch (err) {

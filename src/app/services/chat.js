@@ -1,9 +1,9 @@
 import { API } from "../Utils/Axiosinstance";
 
 // 1) Get all users (Friends List)
-export async function getUsers() {
+export async function getUser() {
   try {
-    const res = await API.get("/users");
+    const res = await API.get("msg/users");
     return {
       success: true,
       data: res.data.users,
@@ -17,7 +17,7 @@ export async function getUsers() {
 // 2) Create OR get chat between two users
 export async function createChatAPI(userId1, userId2) {
   try {
-    const res = await API.post("/msg/create", {
+    const res = await API.post("msg/create", {
       userIds: [userId1, userId2],
     });
 
@@ -34,7 +34,7 @@ export async function createChatAPI(userId1, userId2) {
 // 3) Get messages of selected chat
 export async function getChatMessages(chatId) {
   try {
-    const res = await API.get(`/msg/getmessage/${chatId}`);
+    const res = await API.get(`msg/getmessage/${chatId}`);
 
     return {
       success: true,
